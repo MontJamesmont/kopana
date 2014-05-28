@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader, RequestContext
-from main.models import Match, Team
+from main.models import Match, Team, Season, Matchday, Round
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -52,4 +52,10 @@ def team(request, team_id):
     template = loader.get_template('team.html')
     team = Team.objects.get(id=int(team_id))
     context = RequestContext(request, {'team' : team, })
+    return HttpResponse(template.render(context))
+
+def ListSeasons(request):
+    template = loader.get_template('seasons.html')
+    seasons = Season.objects.all()
+    context = RequestContext(request, {'seasons' : seasons, })
     return HttpResponse(template.render(context))

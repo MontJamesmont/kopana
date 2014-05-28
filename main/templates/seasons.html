@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}strona glowna{% endblock %}
+{% block content %}
+{% load add %}
+<table class="table table-hover">
+<tr>
+<th>Sezon</th>
+<th>Edytuj</th>
+<th>Usuń</th>
+</tr>
+
+{% for season in seasons %}
+<tr>
+    <td>
+         <a href="#">{{ season.year }} / {{ season.year|add:1 }}</a>
+    </td>
+    <td>
+        <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edytuj</a>
+    </td>
+    <td>
+        <a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+ Usuń</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
