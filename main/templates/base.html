@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>kopana - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> kopana</a>
+    {% if request.session.user %}
+        <li><a class="btn btn-default navbar-btn" href="#">Jestes zalogowany jako:{{ request.session.login }}</a></li>
+        <li><a sclass="btn btn-default navbar-btn" href="#">Wyloguj się</a></li>
+    {% else %}
+        <a class="btn btn-default navbar-btn" href="{% url 'signUp' %}">logowanie</a>
+        <a class="btn btn-default navbar-btn" href="{% url 'signIn' %}">Rejestracja</a>
+    {% endif %}
+  </div>
+</nav>
+</div>
+<div>
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

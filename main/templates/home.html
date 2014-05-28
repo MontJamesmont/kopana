@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}strona glowna{% endblock %}
+{% block content %}
+to jest <h1>tresc strony</h1>
+
+{% for match in latest_matches %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{match.data}}</h3>
+  </div>
+  <div class="panel-body">
+    <a class='btn' href='{% url 'team' match.home_id.id %}'>{{match.home_id.name}}</a> -
+    <a class='btn' href='{% url 'team' match.away_id.id %}'>{{match.away_id.name}}</a>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
