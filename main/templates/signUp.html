@@ -1,6 +1,7 @@
+{% extends "base.html" %}
 {% block title %}Rejestracja{% endblock %}
 {% block content %}
-    <form method="post" action=ction="/signUp/">
+    <form method="post" action="">
             {% csrf_token %}
             <table>
                 {{ formset }}
