@@ -11,12 +11,12 @@
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> kopana</a>
-    {% if request.session.user %}
+     {% if request.session.user %}
         <li><a class="btn btn-default navbar-btn" href="#">Jestes zalogowany jako:{{ request.session.login }}</a></li>
         <li><a sclass="btn btn-default navbar-btn" href="#">Wyloguj się</a></li>
     {% else %}
-        <a class="btn btn-default navbar-btn" href="{% url 'signUp' %}">logowanie</a>
-        <a class="btn btn-default navbar-btn" href="{% url 'signIn' %}">Rejestracja</a>
+        <a class="btn btn-default navbar-btn" href="{% url 'signIn' %}">Logowanie</a>
+        <a class="btn btn-default navbar-btn" href="{% url 'signUp' %}">Rejestracja</a>
     {% endif %}
   </div>
 </nav>
