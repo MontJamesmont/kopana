@@ -12,8 +12,8 @@
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> kopana</a>
      {% if request.session.user %}
-        <li><a class="btn btn-default navbar-btn" href="#">Jestes zalogowany jako:{{ request.session.login }}</a></li>
-        <li><a sclass="btn btn-default navbar-btn" href="#">Wyloguj się</a></li>
+        <a class="btn btn-default navbar-btn" href="#">Jestes zalogowany jako:{{ request.session.login }}</a>
+        <a class="btn btn-default navbar-btn" href="#">Wyloguj się</a>
     {% else %}
         <a class="btn btn-default navbar-btn" href="{% url 'signIn' %}">Logowanie</a>
         <a class="btn btn-default navbar-btn" href="{% url 'signUp' %}">Rejestracja</a>
