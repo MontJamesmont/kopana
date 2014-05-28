@@ -20,6 +20,12 @@ urlpatterns = patterns('',
     url(r'^signUp/', views.signUp, name='signUp'),
     url(r'^signIn/', views.signIn, name='signIn'),
     url(r'^seasons/', views.ListSeasons, name='seasons'),
+
    url(r'^updateSeason/(?P<id>\d+)/', views.SeazonUpdate, name='updateseason'),
    url(r'^updateSeason/', views.SeazonUpdate, name='addseason'),
+      url(r'^delSeason/(?P<id>\d+)/', views.delSeason, name='delseason'),
+          url(r'^rounds/(?P<id>\d+)', views.ListReasons, name='rounds'),
+   url(r'^updateRound/(?P<id>\d+)/', views.RoundUpdate, name='updateround'),
+   url(r'^updateRound/', views.RoundUpdate, name='addround'),
+      url(r'^delRound/(?P<id>\d+)/', views.delRound, name='delround'),
 )

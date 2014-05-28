@@ -70,3 +70,30 @@ def SeazonUpdate(request, id=-1):
         return redirect('/seasons')
     else:
         return render_to_response('editform.html', RequestContext(request, {'formset': form}))
+
+def delSeason(request, id):
+    Season.objects.get(id=int(id)).delete()
+    return redirect('/seasons')
+
+def ListReasons(request, id):
+    template = loader.get_template('rounds.html')
+    seasons = Season.objects.get(id=int(id))
+    rounds = Round.objects.filter(s_id=seasons)
+    context = RequestContext(request, {'rounds' : rounds, })
+    return HttpResponse(template.render(context))
+
+
+def RoundUpdate(request, id=-1):
+    us = None
+    if id != -1:
+        us = Round.objects.get(id=int(id))
+    form = RoundForm(request.POST or None, instance=us)
+    if form.is_valid():
+        form.save()
+        return redirect('/seasons')
+    else:
+        return render_to_response('editform.html', RequestContext(request, {'formset': form}))
+
+def delRound(request, id):
+    Round.objects.get(id=int(id)).delete()
+    return redirect('/seasons')

@@ -12,13 +12,13 @@
 {% for season in seasons %}
 <tr>
     <td>
-         <a href="#">{{ season.year }} / {{ season.year|add:1 }}</a>
+         <a href="{% url 'rounds' season.id %}">{{ season.year }} / {{ season.year|add:1 }}</a>
     </td>
     <td>
         <a href="{% url 'updateseason' season.id %}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edytuj</a>
     </td>
     <td>
-        <a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+        <a href="{% url 'delseason' season.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
  Usuń</a>
     </td>
 </tr>
