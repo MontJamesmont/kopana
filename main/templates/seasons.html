@@ -15,7 +15,7 @@
          <a href="#">{{ season.year }} / {{ season.year|add:1 }}</a>
     </td>
     <td>
-        <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edytuj</a>
+        <a href="{% url 'updateseason' season.id %}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edytuj</a>
     </td>
     <td>
         <a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>

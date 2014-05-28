@@ -20,4 +20,6 @@ urlpatterns = patterns('',
     url(r'^signUp/', views.signUp, name='signUp'),
     url(r'^signIn/', views.signIn, name='signIn'),
     url(r'^seasons/', views.ListSeasons, name='seasons'),
+   url(r'^updateSeason/(?P<id>\d+)/', views.SeazonUpdate, name='updateseason'),
+   url(r'^updateSeason/', views.SeazonUpdate, name='addseason'),
 )

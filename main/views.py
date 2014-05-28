@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from main.models import Match, Team, Season, Matchday, Round
+from main.forms import SeasonForm
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponseRedirect
 
 def signUp(request):
@@ -59,3 +60,15 @@ def ListSeasons(request):
     seasons = Season.objects.all()
     context = RequestContext(request, {'seasons' : seasons, })
     return HttpResponse(template.render(context))
+
+def SeazonUpdate(request, id=-1):
+    us = None
+    if id != -1:
+        us = Season.objects.get(id=int(id))
+    form = SeasonForm(request.POST or None, instance=us)
+    if form.is_valid():
+        form.save()
+        return redirect('/seasons')
+    else:
+        return render_to_response('editform.html', RequestContext(request, {'formset': form}))
+
