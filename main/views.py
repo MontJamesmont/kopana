@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.sessions.models import Session
 from main.forms import *
+from django.shortcuts import render_to_response, redirect
 
 def signUp(request):
     if request.method == 'POST': # If the form has been submitted
@@ -18,26 +19,24 @@ def signUp(request):
         form = UserFormSignUp() # An unbound form
     
     return render(request, 'signUp.html', {
-        'form': form,
+        'formset': form,
     })
+
 
 def signIn(request):
-    if request.method == 'POST': # If the form has been submitted...
-        form = forms.UserFormSignIn(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            try:
-                us = User.objects.get(login=form.data['login'],password=form.data['password'])
-                request.session['user'] = us.id
-                request.session['login'] = us.login
-                request.session['type'] = us.type
-            except:
-                return HttpResponseRedirect('/signIn/') # Redirect after POST
+    if request.method == 'POST':
+        form = UserFormSignIn(request.POST)
+        try:
+            us = User.objects.get(login=form.data['login'],password=form.data['password'])
+        except:
+            return redirect('/logowanie')
+        request.session['user'] = us.id
+        request.session['login'] = us.login
+        request.session['type'] = us.type
+        return redirect('/')
     else:
-        form = UserFormSignIn() # An unbound form
-
-    return render(request, 'signIn.html', {
-        'form': form,
-    })
+        form = UserFormSignIn()
+        return render_to_response('signIn.html', RequestContext(request, {'formset': form}))
 
 def home(request):
     template = loader.get_template('home.html')
