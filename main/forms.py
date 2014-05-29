@@ -10,10 +10,10 @@ class UserFormSignUp(forms.ModelForm):
         widgets={
             'password': forms.PasswordInput()
         }
-    confirmpassword = forms.CharField(label='Potwierdz haslo', widget=forms.PasswordInput())
 
 
 class UserFormSignIn(forms.ModelForm):
     class Meta:
         model = User
         fields = ('login', 'password')
+

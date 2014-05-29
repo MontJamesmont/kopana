@@ -29,6 +29,7 @@ def signIn(request):
             us = User.objects.get(login=form.data['login'],password=form.data['password'])
         except:
             return redirect('/logowanie')
+        request.session.set_expiry(60) #ustawienie wygasniecia sesji po 6o sekundach
         request.session['user'] = us.id
         request.session['login'] = us.login
         request.session['type'] = us.type
@@ -36,6 +37,15 @@ def signIn(request):
     else:
         form = UserFormSignIn()
         return render_to_response('signIn.html', RequestContext(request, {'formset': form}))
+
+
+def logout(request):
+    del request.session["user"]
+    del request.session["login"]
+    del request.session["type"]
+    request.session.modified = True
+    return redirect('/')
+
 
 def home(request):
     template = loader.get_template('home.html')
