@@ -57,7 +57,7 @@ class Event(models.Model):
     
 class User(models.Model):
     login = models.CharField(max_length=32, unique=True)
-    email = models.EmailField(max_length=32)
+    email = models.EmailField(max_length=32, unique=True)
     password = models.CharField(max_length=32)
     USER = 'USR'
     ADMIN = 'ADM'

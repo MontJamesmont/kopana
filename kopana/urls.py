@@ -28,4 +28,5 @@ urlpatterns = patterns('',
    url(r'^updateRound/(?P<id>\d+)/', views.RoundUpdate, name='updateround'),
    url(r'^updateRound/', views.RoundUpdate, name='addround'),
       url(r'^delRound/(?P<id>\d+)/', views.delRound, name='delround'),
+     url(r'^logout/', views.logout, name='logout'),
 )

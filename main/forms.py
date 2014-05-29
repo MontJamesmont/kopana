@@ -11,7 +11,6 @@ class UserFormSignUp(forms.ModelForm):
         widgets={
             'password': forms.PasswordInput()
         }
-    confirmpassword = forms.CharField(label='Potwierdz haslo', widget=forms.PasswordInput())
 
 
 class SeasonForm(ModelForm):
@@ -27,3 +26,8 @@ class RoundForm(ModelForm):
 class MatchdayForm(ModelForm):
     class Meta:
         model = Matchday
+
+class UserFormSignIn(ModelForm);
+	class Meta:
+		model = User
+		fields = ('login', 'password')
