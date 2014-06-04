@@ -106,3 +106,37 @@ def RoundUpdate(request, id=-1):
 def delRound(request, id):
     Round.objects.get(id=int(id)).delete()
     return redirect('/seasons')
+
+def coach(request):
+    if request.method == 'POST':
+        form = CoachForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else: 
+        form = CoachForm() 
+    return render(request, 'coach.html', {
+        'form': form,
+    })
+def team(request):
+    if request.method == 'POST':
+        form = TeamForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else: 
+        form = TeamForm() 
+    return render(request, 'team.html', {
+        'form': form,
+    })
+def player(request):
+    if request.method == 'POST':
+        form = PlayerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else: 
+        form = PlayerForm() 
+    return render(request, 'team.html', {
+        'form': form,
+    })
