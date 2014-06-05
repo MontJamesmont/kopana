@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Zawodnicy{% endblock %}
+{% block content %}
+{% load add %}
+
+{% if request.session.user %}
+<form method="post" action="">
+            {% csrf_token %}
+            <table>
+                {{ form }}
+            </br>
+            </table>
+        <input type="submit" class="btn btn-default" value="Zatwierdź">
+        <input type="reset" class="btn btn-default" value="Anuluj">
+</form>
+{%endif%}
+<table class="table table-hover">
+<tr>
+<th>Zawodnicy</th>
+{% if request.session.user %}
+<th>Edytuj</th>
+<th>Usuń</th>
+{%endif%}
+</tr>
+<br>
+{% for player in players %}
+<tr>
+    <td>
+         <a href="{% url 'player' player.id player.t_id.id %"> {{ player.name }} {{ player.surname }} </a>
+    </td>
+    {% if request.session.user %}
+    <td>
+        <a href="{% url 'PlayerUpdate' player.id %}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edytuj</a>
+    </td>
+    <td>
+        <a href="{% url 'PlayerDelete' player.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+ Usuń</a>
+    </td>
+    {%endif%}
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

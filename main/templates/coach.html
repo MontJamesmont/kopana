@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Trenerzy{% endblock %}
+{% block content %}
+{% load add %}
+
+{% if request.session.user %}
+<form method="post" action="">
+            {% csrf_token %}
+            <table>
+                {{ form }}
+            </br>
+            </table>
+        <input type="submit" class="btn btn-default" value="Zatwierdź">
+        <input type="reset" class="btn btn-default" value="Anuluj">
+</form>
+{%endif%}
+<br>
+<table class="table table-hover">
+<tr>
+<th>Coach</th>
+{% if request.session.user %}
+<th>Edytuj</th>
+<th>Usuń</th>
+{%endif%}
+</tr>
+
+{% for coach in coach %}
+<tr>
+    <td>
+         {{ coach.name}} {{ coach.surname}}
+    </td>
+    {% if request.session.user %}
+    <td>
+        <a href="{% url 'CoachUpdate' coach.id %}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edytuj</a>
+    </td>
+    <td>
+        <a href="{% url 'CoachDelete' coach.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+ Usuń</a>
+    </td>
+    {%endif%}
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

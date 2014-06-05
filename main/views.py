@@ -63,6 +63,13 @@ def team(request, team_id):
     context = RequestContext(request, {'team' : team, })
     return HttpResponse(template.render(context))
 
+def player(request, player_id, team_id):
+    template = loader.get_template('player.html')
+    team = Team.objects.get(id=int(team_id))
+    player = Player.objects.get(id=int(player_id))
+    context = RequestContext(request, {'player' : player, 'team': team, })
+    return HttpResponse(template.render(context))
+
 def ListSeasons(request):
     template = loader.get_template('seasons.html')
     seasons = Season.objects.all()
@@ -108,35 +115,76 @@ def delRound(request, id):
     return redirect('/seasons')
 
 def coach(request):
+    coach = Coach.objects.all()
     if request.method == 'POST':
         form = CoachForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
     else: 
         form = CoachForm() 
     return render(request, 'coach.html', {
-        'form': form,
+        'form': form, 'coach': coach,
     })
-def team(request):
+    
+def CoachUpdate(request, id=-1):
+    us = None
+    if id != -1:
+        us = Coach.objects.get(id=int(id))
+    form = CoachForm(request.POST or None, instance=us)
+    if form.is_valid():
+        form.save()
+    return redirect('/coach')
+
+def CoachDelete(request, id):
+    Coach.objects.get(id=int(id)).delete()
+    return redirect('/coach')
+
+def teams(request):
+    teams = Team.objects.all()
     if request.method == 'POST':
         form = TeamForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
     else: 
         form = TeamForm() 
-    return render(request, 'team.html', {
-        'form': form,
+    return render(request, 'teams.html', {
+        'form': form, 'teams': teams,
     })
-def player(request):
+    
+def TeamUpdate(request, id=-1):
+    us = None
+    if id != -1:
+        us = Team.objects.get(id=int(id))
+    form = TeamForm(request.POST or None, instance=us)
+    if form.is_valid():
+        form.save()
+    return redirect('/teams')
+
+def TeamDelete(request, id):
+    Team.objects.get(id=int(id)).delete()
+    return redirect('/teams')
+    
+def players(request):
+    players = Player.objects.all()
     if request.method == 'POST':
         form = PlayerForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
     else: 
         form = PlayerForm() 
-    return render(request, 'team.html', {
-        'form': form,
+    return render(request, 'players.html', {
+        'form': form, 'players': players,
     })
+    
+def PlayerUpdate(request, id=-1):
+    us = None
+    if id != -1:
+        us = Player.objects.get(id=int(id))
+    form = PlayerForm(request.POST or None, instance=us)
+    if form.is_valid():
+        form.save()
+    return redirect('/players')
+
+def PlayerDelete(request, id):
+    Player.objects.get(id=int(id)).delete()
+    return redirect('/players')

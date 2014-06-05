@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.models import ModelForm
-from main.models import User, Season, Matchday, Round
+from main.models import User, Season, Matchday, Round, Coach, Team, Player
 from django.core import validators
 
         
